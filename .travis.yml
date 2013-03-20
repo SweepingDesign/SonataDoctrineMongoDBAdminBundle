@@ -4,7 +4,10 @@ php:
   - 5.3
   - 5.4
 
+services: mongodb
+
 before_script:
+  - pecl -q install -f mongo && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   - composer install --dev
 
 script: phpunit  --coverage-text
